@@ -19,6 +19,18 @@ include_directories(include)
 
 add_library(gl3w src/gl3w.c)
 
+set_target_properties(
+    gl3w
+PROPERTIES
+    PUBLIC_HEADER "include/GL/glcorearb.h;include/GL/gl3w.h"
+)
+
 if (UNIX)
   target_link_libraries(gl3w dl)
 endif()
+
+install(
+    TARGETS gl3w
+    ARCHIVE DESTINATION lib
+    PUBLIC_HEADER DESTINATION include/GL
+)
